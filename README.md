@@ -2,7 +2,7 @@
 
 Ankara icin kahve aboneligi ve siparis takip uygulamasi. Backend FastAPI ve SQLite, web arayuzu React/Vite, harita Leaflet kullanir.
 
-## Ozellikler
+## Özellikler
 
 - Telefon numarasi ve OTP (`1234`) ile kayit/giris; JWT access ve refresh token oturumu
 - Starter, Premium ve Unlimited abonelikleri; yalnizca test kartlarini kabul eden Paycell odeme simulasyonu
