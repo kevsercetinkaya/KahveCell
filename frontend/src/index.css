@@ -1,0 +1,21 @@
+:root {
+  --font-body: "Avenir Next", "Trebuchet MS", sans-serif;
+  color: #1b2b35;
+  background: #f3f5f2;
+  color-scheme: light;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-synthesis: none;
+  font-weight: 450;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+html, body { min-width: 320px; min-height: 100%; margin: 0; }
+body { min-height: 100dvh; }
+button, input, select { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #167269; outline-offset: 3px; }
+#root { min-height: 100dvh; }
