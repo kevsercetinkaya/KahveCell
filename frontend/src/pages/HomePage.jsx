@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Coffee, LocateFixed, MapPin, Search, SlidersHorizontal } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { apiRequest, ApiError } from '../api/client'
 import ShopMap from '../components/ShopMap'
@@ -15,7 +15,6 @@ export default function HomePage() {
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   const [selectedShop, setSelectedShop] = useState(null)
-  const navigate = useNavigate()
 
   useEffect(() => {
     let active = true
@@ -57,6 +56,7 @@ export default function HomePage() {
           })
           const result = await apiRequest(`/shops?${query}`, { auth: false })
           setShops(result)
+          setSelectedShop(null)
           setSearch('')
           setNotice(`${result.length} yakın nokta bulundu.`)
         } catch {
@@ -94,7 +94,11 @@ export default function HomePage() {
             {loading && shops.length === 0 ? (
               <div className="map-placeholder">Harita ve dükkânlar yükleniyor…</div>
             ) : (
-              <ShopMap shops={shops} onSelect={setSelectedShop} />
+              <ShopMap
+                shops={shops}
+                selectedShop={selectedShop}
+                onSelect={setSelectedShop}
+              />
             )}
           </div>
           <div className="map-attribution-note">Harita verisi © OpenStreetMap katkıda bulunanlar</div>
@@ -113,7 +117,10 @@ export default function HomePage() {
             <input
               type="search"
               value={search}
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={(event) => {
+                setSelectedShop(null)
+                setSearch(event.target.value)
+              }}
               placeholder="Semt veya dükkân ara"
               aria-label="Semt veya dükkân ara"
             />
@@ -135,8 +142,7 @@ export default function HomePage() {
                   className={`shop-result${selectedShop?.id === shop.id ? ' is-selected' : ''}`}
                   key={shop.id}
                   type="button"
-                  onClick={() => navigate(`/shops/${shop.id}`)}
-                  onMouseEnter={() => setSelectedShop(shop)}
+                  onClick={() => setSelectedShop(shop)}
                 >
                   <span className="shop-result-mark"><Coffee size={17} /></span>
                   <span className="shop-result-info">
